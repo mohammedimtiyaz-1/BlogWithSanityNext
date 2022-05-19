@@ -12,6 +12,11 @@
 /.next/
 /out/
 
+
+# sanity
+/mediumblog/node_modules
+
+/node_modules
 # production
 /build
 
