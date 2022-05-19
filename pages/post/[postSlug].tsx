@@ -85,8 +85,7 @@ function Post({ post }: any) {
 //   console.log(ctx)
 // }
 
-export const getStaticProps = async ({ params }) => {
-  console.log(params)
+export const getStaticProps = async ({ params }: any) => {
   const query = `*[_type=="post" && slug.current==$postSlug][0]{
     _id,_createdAt,title,
     author->{
@@ -108,7 +107,7 @@ export const getStaticPaths = async () => {
   }
   }`
   const posts = await sanityClient.fetch(query)
-  const paths = posts.map((post) => ({
+  const paths = posts.map((post: any) => ({
     params: { postSlug: post.slug.current },
   }))
 

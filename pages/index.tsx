@@ -5,7 +5,7 @@ import MainBanner from '../Components/MainBanner'
 import { sanityClient } from '../sanity'
 import Posts from '../Components/Posts'
 
-const Home: NextPage = ({ posts }: { posts: [any] }) => {
+const Home = ({ posts }: { posts: [any] }) => {
   return (
     <div>
       <Head>
