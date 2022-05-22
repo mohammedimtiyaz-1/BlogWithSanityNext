@@ -17,6 +17,8 @@ function Comments({ post }: any) {
     formState: { errors },
   } = useForm<IFormInput>()
 
+  console.log('errors', errors)
+
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const response = await fetch('/api/createComment', {
       method: 'POST',
@@ -41,7 +43,7 @@ function Comments({ post }: any) {
           <p>Once it is approved, it will be visible</p>
         </div>
       ) : (
-        <>
+        <div className="mb-4">
           <h3 className="font-mono font-light text-yellow-500">
             Enjoyed this article ?
           </h3>
@@ -76,18 +78,20 @@ function Comments({ post }: any) {
               {...register('comments', { required: true })}
               className="h-40 p-2 my-1 mb-4 border border-gray-400 rounded-lg outline-none ring-yellow-400 focus:border-0 focus:ring"
             ></textarea>
-            <div className="p-5 font-mono text-red-600">
-              {errors.name && <p>! Name field is required</p>}
-              {errors.email && <p>! Email field is required</p>}
-              {errors.comments && <p>! Comments field is required</p>}
-            </div>
+            {Object.keys(errors).length > 0 && (
+              <div className="p-5 font-mono text-red-600">
+                {errors.name && <p>! Name field is required</p>}
+                {errors.email && <p>! Email field is required</p>}
+                {errors.comments && <p>! Comments field is required</p>}
+              </div>
+            )}
             <input
               type="submit"
               value="submit"
               className="max-w-xs py-2 font-mono text-xl font-bold text-white bg-yellow-500 rounded-full focus:shadow-outline hover:bg-yellow-400 focus:outline-none"
             />
           </form>
-        </>
+        </div>
       )}
       <ReadComments comments={post.comments} />
     </div>
